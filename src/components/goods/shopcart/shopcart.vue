@@ -2,7 +2,7 @@
   <div class="shopcart">
     <div class="shopWrap">
       <span class="icon-shopping_cart"></span>
-      <span class="price">¥{{minPrice}}</span>
+      <span class="price">¥{{allPrice}}</span>
       <span class="fee">另需配送费¥{{deliveryPrice}}元</span>
     </div>
     <div class="sendWrap">¥{{minPrice}}起送</div>
@@ -14,9 +14,9 @@
   export default {
     created () {
       let self = this;
-      Bus.$on('update-shoplist', function (foodName, foodPrice) {
+      Bus.$on('update-shoplist', function (foodName, foodPrice, foodCount) {
 //        console.log(foodName, foodPrice);
-        let tmp = {name: foodName, price: foodPrice};
+        let tmp = {name: foodName, price: foodPrice, count: foodCount};
         let arr = self.shoplist.map(function (item) {
           return item.name;
         });
@@ -26,7 +26,7 @@
         } else {
           self.shoplist.push(tmp);  // 不存在，新增
         }
-        console.log(self.shoplist);
+//        console.log(self.shoplist);
       });
     },
     data () {
@@ -37,6 +37,16 @@
     props: {
       minPrice: '',
       deliveryPrice: ''
+    },
+    computed: {
+      allPrice: function () {
+        let tmp = 0;
+        this.shoplist.forEach(function (item) {
+          console.log(item.count);
+          tmp += item.count * item.price;
+        });
+        return tmp;
+      }
     }
   };
 </script>
