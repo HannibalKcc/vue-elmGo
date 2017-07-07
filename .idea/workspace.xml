@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ceac8b92-2535-4f63-93c6-0d79085d64cd" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/common/js/swiper.min.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/goods/goods.vue" afterPath="$PROJECT_DIR$/src/components/goods/goods.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/goods/panel/panel.vue" afterPath="$PROJECT_DIR$/src/components/goods/panel/panel.vue" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -69,8 +65,8 @@
       <file leaf-file-name="shopcart.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/goods/shopcart/shopcart.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="7" column="23" lean-forward="true" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
+            <state relative-caret-position="274">
+              <caret line="8" column="8" lean-forward="true" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
               <folding>
                 <element signature="e#1981#2125#0" expanded="false" />
               </folding>
@@ -616,7 +612,7 @@
       <workItem from="1499132786386" duration="8720000" />
       <workItem from="1499216247974" duration="8192000" />
       <workItem from="1499322629990" duration="10677000" />
-      <workItem from="1499389967767" duration="6542000" />
+      <workItem from="1499389967767" duration="7166000" />
     </task>
     <task id="LOCAL-00001" summary="移动swiper插件到static">
       <created>1499394751966</created>
@@ -632,18 +628,25 @@
       <option name="project" value="LOCAL" />
       <updated>1499417385407</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="计算出购物车总价格-2">
+      <created>1499417849369</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1499417849369</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="121669000" />
+    <option name="totallyTimeSpent" value="122293000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24231333" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328594" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.328594" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328594" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328594" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -703,7 +706,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="移动swiper插件到static" />
     <MESSAGE value="计算出购物车总价格" />
-    <option name="LAST_COMMIT_MESSAGE" value="计算出购物车总价格" />
+    <MESSAGE value="计算出购物车总价格-2" />
+    <option name="LAST_COMMIT_MESSAGE" value="计算出购物车总价格-2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1094,8 +1098,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/goods/shopcart/shopcart.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="7" column="23" lean-forward="true" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
+        <state relative-caret-position="274">
+          <caret line="8" column="8" lean-forward="true" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
           <folding>
             <element signature="e#1981#2125#0" expanded="false" />
           </folding>
