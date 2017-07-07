@@ -98,7 +98,7 @@
 
 <style scoped rel="stylesheet/less" type="text/less" lang="less">
   // 引入swiper样式
-  @import "../../common/less/swiper.min.css";
+  @import "../../../static/swiper.min.css";
   // 引入icon样式
   @import "../../common/less/style.css";
 

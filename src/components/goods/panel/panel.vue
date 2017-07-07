@@ -27,7 +27,7 @@
     },
     watch: {
       count: function () {
-        Bus.$emit('update-shoplist', this.details.name, this.details.price);
+        Bus.$emit('update-shoplist', this.details.name, this.details.price, this.count);
       }
     }
   };
