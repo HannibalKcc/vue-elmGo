@@ -5,7 +5,7 @@
       <span class="price">¥{{allPrice}}</span>
       <span class="fee">另需配送费¥{{deliveryPrice}}元</span>
     </div>
-    <div class="sendWrap">¥{{minPrice}}起送</div>
+    <div class="sendWrap" :class="{setGreen: isGreen}">{{sendText}}</div>
   </div>
 </template>
 
@@ -31,7 +31,8 @@
     },
     data () {
       return {
-        shoplist: []
+        shoplist: [],
+        isGreen: false
       };
     },
     props: {
@@ -42,10 +43,18 @@
       allPrice: function () {
         let tmp = 0;
         this.shoplist.forEach(function (item) {
-          console.log(item.count);
           tmp += item.count * item.price;
         });
         return tmp;
+      },
+      sendText: function () {
+        if (this.allPrice >= this.minPrice) {
+          this.isGreen = true;
+          return '结算';
+        } else {
+          this.isGreen = false;
+          return '￥' + this.minPrice + '起送';
+        }
       }
     }
   };
@@ -112,6 +121,9 @@
       font-weight: 700;
       line-height: 48px;
       color: rgba(255, 255, 255, 0.4);
+    }
+    .setGreen {
+      background: rgb(1, 180, 60);
     }
   }
 </style>
