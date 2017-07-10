@@ -1,11 +1,11 @@
 <template>
   <div class="shopcart">
     <div class="shopWrap">
-      <span class="icon-shopping_cart"></span>
+      <span class="icon-shopping_cart" :class="{setBlue: allPrice}"></span>
       <span class="price">¥{{allPrice}}</span>
       <span class="fee">另需配送费¥{{deliveryPrice}}元</span>
     </div>
-    <div class="sendWrap" :class="{setGreen: isGreen}">{{sendText}}</div>
+    <input type="button" class="sendWrap" :class="{setGreen: enableSend}" :value="sendText" :disabled="enableSend">
   </div>
 </template>
 
@@ -32,7 +32,7 @@
     data () {
       return {
         shoplist: [],
-        isGreen: false
+        enableSend: false
       };
     },
     props: {
@@ -49,10 +49,10 @@
       },
       sendText: function () {
         if (this.allPrice >= this.minPrice) {
-          this.isGreen = true;
+          this.enableSend = true;
           return '结算';
         } else {
-          this.isGreen = false;
+          this.enableSend = false;
           return '￥' + this.minPrice + '起送';
         }
       }
@@ -92,6 +92,10 @@
           font-size: 50px;
         }
       }
+      .setBlue {
+        background: rgb(35, 79, 255);
+        color: rgb(255, 255, 255);
+      }
       .price {
         display: inline-block;
         margin-top: 24px;
@@ -114,12 +118,11 @@
     .sendWrap {
       flex: 0 0 210px;
       width: 210px;
-      padding-top: 24px;
+      border: 0;
       background: rgba(255, 255, 255, 0.2);
       text-align: center;
       font-size: 24px;
       font-weight: 700;
-      line-height: 48px;
       color: rgba(255, 255, 255, 0.4);
     }
     .setGreen {
