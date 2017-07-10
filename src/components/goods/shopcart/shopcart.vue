@@ -76,7 +76,7 @@
         display: inline-block;
         position: absolute;
         bottom: 4px;
-        left: 36px;
+        left: 24px;
         width: 88px;
         height: 88px;
         margin-top: 24px;
@@ -106,7 +106,7 @@
       .fee {
         display: inline-block;
         margin-left: 24px;
-        font-size: 32px;
+        font-size: 24px;
         line-height: 48px;
         color: rgba(255, 255, 255, 0.4);
       }
