@@ -67,6 +67,7 @@
       };
     },
     created () {
+      // 利用vueresource请求数据
       this.$http.get('/api/goods').then((response) => {
         response = response.body;
         if (response.errno === 0) {
@@ -79,17 +80,38 @@
     },
     methods: {
       _initBScroll () {
+        let self = this;
+        let jContentBox = document.getElementsByClassName('contentBox');
+        jContentBox[0].style.background = 'white';
         this.leftSwiper = new Swiper(this.$refs.leftSwiper, {
           direction: 'vertical',
           slidesPerView: 'auto',  // 能够同时显示的内容项数量
           mousewheelControl: true,
-          freeMode: true  // 自由模式
+          freeMode: true,  // 自由模式
+          onTap: function (leftSwiper) {
+            // 清空样式
+            for (let i = 0; i < jContentBox.length; i++) {
+              jContentBox[i].style.background = '';
+            }
+            // 选中显白
+            jContentBox[leftSwiper.clickedIndex].style.background = 'white';
+            // 右swiper匹配
+            self.rightSwiper.slideTo(leftSwiper.clickedIndex);
+          }
         });
         this.rightSwiper = new Swiper(this.$refs.rightSwiper, {
           direction: 'vertical',
           slidesPerView: 'auto',  // 能够同时显示的内容项数量
           mousewheelControl: true,
-          freeMode: true  // 自由模式
+          freeMode: true,  // 自由模式
+          onSlideChangeEnd: function (rightSwiper) {
+            // 清空样式
+            for (let i = 0; i < jContentBox.length; i++) {
+              jContentBox[i].style.background = '';
+            }
+            // 选中显白
+            jContentBox[rightSwiper.activeIndex].style.background = 'white';
+          }
         });
       }
     }
