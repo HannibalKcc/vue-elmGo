@@ -1,11 +1,11 @@
 <template>
   <div class="panel">
     <transition name="animSub">
-      <div class="detailSub icon-remove_circle_outline" v-show="details.count > 0 || count > 0" @click="subFood"></div>
+      <div class="detailSub icon-remove_circle_outline" v-show="count > 0" @click="subFood"></div>
     </transition>
     <div class="detailCount">
       <span v-show="count > 0">{{count}}</span>
-      <span v-show="details.count > 0">{{details.count}}</span>
+      <!--<span v-show="details.count > 0">{{details.count}}</span>-->
     </div>
     <div class="detailAdd icon-add_circle" @click="addFood"></div>
   </div>
@@ -15,6 +15,14 @@
   import Bus from '../../../common/js/bus.js';
   export default {
 //    没有设置接受函数
+    created () {
+      let self = this;
+      Bus.$on('update-shoplist', function (foodName, foodPrice, foodCount) {
+        if (foodName === self.details.name) {
+          self.count = foodCount;
+        }
+      });
+    },
     props: {
       details: {}
     },
@@ -25,26 +33,25 @@
     },
     methods: {
       subFood: function () {
-        if (this.details.count > 0) {
-          this.details.count--;
-          this.count = this.details.count;
-          return;
-        }
+//        if (this.details.count > 0) {
+//          this.details.count--;
+//          this.count = this.details.count;
+//          return;
+//        }
         if (this.count > 0) this.count--;
       },
       addFood: function () {
-        if (this.details.count > 0) {
-          this.details.count++;
-          this.count = this.details.count;
-          return;
-        }
+//        if (this.details.count > 0) {
+//          this.details.count++;
+//          this.count = this.details.count;
+//          return;
+//        }
         this.count++;
       }
     },
     watch: {
       count: function () {
-        let realCount = this.details.counts || this.count;
-        Bus.$emit('update-shoplist', this.details.name, this.details.price, realCount);
+        Bus.$emit('update-shoplist', this.details.name, this.details.price, this.count);
       }
     }
   }
