@@ -42,6 +42,8 @@
     </div>
     <!--购物车-->
     <shopcart :minPrice="seller.minPrice" :deliveryPrice="seller.deliveryPrice"></shopcart>
+    <!--购物车清单-->
+    <shopcart-list></shopcart-list>
   </div>
 </template>
 
@@ -49,11 +51,13 @@
   //  webpack中,import与moduels.exports不能同时使用，单纯放到common文件夹中会报错，把文件放在static文件夹中是个可行的方法
   import shopcart from './shopcart/shopcart.vue';
   import panel from './panel/panel.vue';
+  import shopcartList from './shopcartList/shopcartList.vue';
   import Swiper from '../../../static/swiper.min.js';
   export default {
     components: {
       shopcart,
-      panel
+      panel,
+      shopcartList
     },
     props: {
       seller: {

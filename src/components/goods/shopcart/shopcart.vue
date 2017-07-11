@@ -1,7 +1,7 @@
 <template>
   <div class="shopcart">
     <div class="shopWrap">
-      <span class="icon-shopping_cart" :class="{setBlue: allPrice}"></span>
+      <span class="icon-shopping_cart" :class="{setBlue: allPrice}" @click="toggleListShow"></span>
       <span class="price">¥{{allPrice}}</span>
       <span class="fee">另需配送费¥{{deliveryPrice}}元</span>
     </div>
@@ -15,7 +15,6 @@
     created () {
       let self = this;
       Bus.$on('update-shoplist', function (foodName, foodPrice, foodCount) {
-//        console.log(foodName, foodPrice);
         let tmp = {name: foodName, price: foodPrice, count: foodCount};
         let arr = self.shoplist.map(function (item) {
           return item.name;
@@ -26,7 +25,6 @@
         } else {
           self.shoplist.push(tmp);  // 不存在，新增
         }
-//        console.log(self.shoplist);
       });
     },
     data () {
@@ -55,6 +53,11 @@
           this.enableSend = false;
           return '￥' + this.minPrice + '起送';
         }
+      }
+    },
+    methods: {
+      toggleListShow () {
+        Bus.$emit('toggle-shopcart-list-show');
       }
     }
   };
@@ -93,7 +96,7 @@
         }
       }
       .setBlue {
-        background: rgb(35, 79, 255);
+        background: rgb(0, 160, 220);
         color: rgb(255, 255, 255);
       }
       .price {
