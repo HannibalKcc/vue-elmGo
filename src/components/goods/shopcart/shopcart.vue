@@ -12,21 +12,6 @@
 <script type="text/ecmascript-6">
   import Bus from '../../../common/js/bus.js';
   export default {
-    created () {
-      let self = this;
-      Bus.$on('update-shoplist', function (foodName, foodPrice, foodCount) {
-        let tmp = {name: foodName, price: foodPrice, count: foodCount};
-        let arr = self.shoplist.map(function (item) {
-          return item.name;
-        });
-        let exeist = arr.indexOf(tmp.name); // 存在位置
-        if (exeist >= 0) {
-          self.shoplist.splice(exeist, 1, tmp);  // 存在，修改
-        } else {
-          self.shoplist.push(tmp);  // 不存在，新增
-        }
-      });
-    },
     data () {
       return {
         shoplist: [],
@@ -39,11 +24,7 @@
     },
     computed: {
       allPrice: function () {
-        let tmp = 0;
-        this.shoplist.forEach(function (item) {
-          tmp += item.count * item.price;
-        });
-        return tmp;
+        return this.$store.getters.totalPrice;
       },
       sendText: function () {
         if (this.allPrice >= this.minPrice) {

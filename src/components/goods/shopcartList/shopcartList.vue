@@ -3,10 +3,10 @@
     <div class="contentBox">
       <div class="title">
         <span class="text">购物车</span>
-        <span class="clearList">清空</span>
+        <span class="clearList" @click="clearList">清空</span>
       </div>
       <ul>
-        <li class="foodsdetail" v-for="details in shoplist">
+        <li class="foodsdetail" v-for="details in foodList">
           <span class="name">{{details.name}}</span>
           <span class="price">¥{{details.price}}</span>
           <panel :details="details"></panel>
@@ -25,27 +25,24 @@
     },
     created () {
       let self = this;
-      Bus.$on('update-shoplist', function (foodName, foodPrice, foodCount) {
-        let tmp = {name: foodName, price: foodPrice, count: foodCount};
-        let arr = self.shoplist.map(function (item) {
-          return item.name;
-        });
-        let exeist = arr.indexOf(tmp.name); // 存在位置
-        if (exeist >= 0) {
-          self.shoplist.splice(exeist, 1, tmp);  // 存在，修改
-        } else {
-          self.shoplist.push(tmp);  // 不存在，新增
-        }
-      });
       Bus.$on('toggle-shopcart-list-show', function () {
         self.isShow = !self.isShow;
       });
     },
     data () {
       return {
-        shoplist: [],
         isShow: false
       };
+    },
+    computed: {
+      foodList () {
+        return this.$store.state.foodList;
+      }
+    },
+    methods: {
+      clearList: function () {
+        this.$store.commit('clear');
+      }
     }
   };
 </script>

@@ -5,7 +5,6 @@
     </transition>
     <div class="detailCount">
       <span v-show="count > 0">{{count}}</span>
-      <!--<span v-show="details.count > 0">{{details.count}}</span>-->
     </div>
     <div class="detailAdd icon-add_circle" @click="addFood"></div>
   </div>
@@ -14,44 +13,43 @@
 <script type="text/ecmascript-6">
   import Bus from '../../../common/js/bus.js';
   export default {
-//    没有设置接受函数
-    created () {
-      let self = this;
-      Bus.$on('update-shoplist', function (foodName, foodPrice, foodCount) {
-        if (foodName === self.details.name) {
-          self.count = foodCount;
-        }
-      });
-    },
     props: {
       details: {}
     },
     data () {
       return {
-        count: 0
       };
+    },
+    created () {
+      this.$store.watch(
+        state => state.foodList,
+        function () {
+          // do something on data change
+        }
+      );
     },
     methods: {
       subFood: function () {
-//        if (this.details.count > 0) {
-//          this.details.count--;
-//          this.count = this.details.count;
-//          return;
-//        }
-        if (this.count > 0) this.count--;
+        let fix = {name: this.details.name, price: this.details.price};
+        this.$store.commit('subFood', fix);
       },
-      addFood: function () {
-//        if (this.details.count > 0) {
-//          this.details.count++;
-//          this.count = this.details.count;
-//          return;
-//        }
-        this.count++;
+      addFood: function (e) {
+        let fix = {name: this.details.name, price: this.details.price};
+        this.$store.commit('addFood', fix);
+        Bus.$emit('jump', e.target.getBoundingClientRect());
       }
     },
-    watch: {
-      count: function () {
-        Bus.$emit('update-shoplist', this.details.name, this.details.price, this.count);
+    computed: {
+      count () {
+        let self = this;
+        let tmpCount = this.$store.state.foodList.filter(function (item) {
+          return self.details.name === item.name;
+        });
+        if (tmpCount[0]) {
+          return tmpCount[0].count;
+        } else {
+          return 0;
+        }
       }
     }
   }
@@ -69,6 +67,7 @@
     opacity: 0;
   }
 
+  /*组件样式*/
   .panel {
     /*display: inline-block;*/
     float: right;
@@ -91,12 +90,13 @@
         color: rgb(143, 157, 159);
       }
     }
-    .detailAdd {
+    .icon-add_circle {
       display: inline-block;
       vertical-align: middle;
       line-height: 48px;
       font-size: 48px;
       color: rgb(0, 160, 220);
+      z-index: 100;
     }
   }
 </style>
