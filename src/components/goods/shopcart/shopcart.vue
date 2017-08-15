@@ -1,7 +1,7 @@
 <template>
   <div class="shopcart">
     <div class="shopWrap">
-      <span class="icon-shopping_cart" :class="{setBlue: allPrice}"></span>
+      <span class="icon-shopping_cart" :class="{setBlue: allPrice}" @click="toggleListShow"></span>
       <span class="price">¥{{allPrice}}</span>
       <span class="fee">另需配送费¥{{deliveryPrice}}元</span>
     </div>
@@ -12,23 +12,6 @@
 <script type="text/ecmascript-6">
   import Bus from '../../../common/js/bus.js';
   export default {
-    created () {
-      let self = this;
-      Bus.$on('update-shoplist', function (foodName, foodPrice, foodCount) {
-//        console.log(foodName, foodPrice);
-        let tmp = {name: foodName, price: foodPrice, count: foodCount};
-        let arr = self.shoplist.map(function (item) {
-          return item.name;
-        });
-        let exeist = arr.indexOf(tmp.name); // 存在位置
-        if (exeist >= 0) {
-          self.shoplist.splice(exeist, 1, tmp);  // 存在，修改
-        } else {
-          self.shoplist.push(tmp);  // 不存在，新增
-        }
-//        console.log(self.shoplist);
-      });
-    },
     data () {
       return {
         shoplist: [],
@@ -41,11 +24,7 @@
     },
     computed: {
       allPrice: function () {
-        let tmp = 0;
-        this.shoplist.forEach(function (item) {
-          tmp += item.count * item.price;
-        });
-        return tmp;
+        return this.$store.getters.totalPrice;
       },
       sendText: function () {
         if (this.allPrice >= this.minPrice) {
@@ -55,6 +34,11 @@
           this.enableSend = false;
           return '￥' + this.minPrice + '起送';
         }
+      }
+    },
+    methods: {
+      toggleListShow () {
+        Bus.$emit('toggle-shopcart-list-show');
       }
     }
   };
@@ -93,7 +77,7 @@
         }
       }
       .setBlue {
-        background: rgb(35, 79, 255);
+        background: rgb(0, 160, 220);
         color: rgb(255, 255, 255);
       }
       .price {

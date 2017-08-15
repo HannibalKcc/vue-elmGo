@@ -1,7 +1,11 @@
 <template>
   <div class="panel">
-    <div class="detailSub icon-remove_circle_outline" v-show="count" @click="subFood"></div>
-    <div class="detailCount" v-show="count">{{count}}</div>
+    <transition name="animSub">
+      <div class="detailSub icon-remove_circle_outline" v-show="count > 0" @click="subFood"></div>
+    </transition>
+    <div class="detailCount">
+      <span v-show="count > 0">{{count}}</span>
+    </div>
     <div class="detailAdd icon-add_circle" @click="addFood"></div>
   </div>
 </template>
@@ -14,51 +18,85 @@
     },
     data () {
       return {
-        count: 0
       };
+    },
+    created () {
+      this.$store.watch(
+        state => state.foodList,
+        function () {
+          // do something on data change
+        }
+      );
     },
     methods: {
       subFood: function () {
-        this.count--;
+        let fix = {name: this.details.name, price: this.details.price};
+        this.$store.commit('subFood', fix);
       },
-      addFood: function () {
-        this.count++;
+      addFood: function (e) {
+        let fix = {name: this.details.name, price: this.details.price};
+        this.$store.commit('addFood', fix);
+        Bus.$emit('jump', e.target.getBoundingClientRect());
       }
     },
-    watch: {
-      count: function () {
-        Bus.$emit('update-shoplist', this.details.name, this.details.price, this.count);
+    computed: {
+      count () {
+        let self = this;
+        let tmpCount = this.$store.state.foodList.filter(function (item) {
+          return self.details.name === item.name;
+        });
+        if (tmpCount[0]) {
+          return tmpCount[0].count;
+        } else {
+          return 0;
+        }
       }
     }
-  };
+  }
+  ;
 </script>
 
 <style scoped rel="stylesheet/less" type="text/less" lang="less">
+  /*动画效果*/
+  .animSub-enter-active, .animSub-leave-active {
+    transition: all .3s linear;
+  }
+
+  .animSub-enter, .animSub-leave-to {
+    transform: translateX(48px) rotate(180deg);
+    opacity: 0;
+  }
+
+  /*组件样式*/
   .panel {
     /*display: inline-block;*/
     float: right;
+    vertical-align: middle;
     .detailSub {
       display: inline-block;
       vertical-align: middle;
-      line-height: 28px;
-      font-size: 28px;
-      color: blue;
+      line-height: 48px;
+      font-size: 48px;
+      color: rgb(0, 160, 220);
     }
     .detailCount {
       display: inline-block;
       width: 48px;
-      vertical-align: middle;
       text-align: center;
-      font-size: 20px;
-      line-height: 28px;
-      color: rgb(143, 157, 159);
+      span {
+        vertical-align: middle;
+        font-size: 20px;
+        line-height: 48px;
+        color: rgb(143, 157, 159);
+      }
     }
-    .detailAdd {
+    .icon-add_circle {
       display: inline-block;
       vertical-align: middle;
-      line-height: 28px;
-      font-size: 28px;
-      color: blue;
+      line-height: 48px;
+      font-size: 48px;
+      color: rgb(0, 160, 220);
+      z-index: 100;
     }
   }
 </style>

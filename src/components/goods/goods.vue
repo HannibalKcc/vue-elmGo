@@ -40,20 +40,28 @@
         </li>
       </ul>
     </div>
+    <!--动画小球-->
+    <jump-ball></jump-ball>
     <!--购物车-->
     <shopcart :minPrice="seller.minPrice" :deliveryPrice="seller.deliveryPrice"></shopcart>
+    <!--购物车清单-->
+    <shopcart-list></shopcart-list>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   //  webpack中,import与moduels.exports不能同时使用，单纯放到common文件夹中会报错，把文件放在static文件夹中是个可行的方法
+  import jumpBall from './jumpBall/jumpBall.vue';
   import shopcart from './shopcart/shopcart.vue';
   import panel from './panel/panel.vue';
+  import shopcartList from './shopcartList/shopcartList.vue';
   import Swiper from '../../../static/swiper.min.js';
   export default {
     components: {
+      jumpBall,
       shopcart,
-      panel
+      panel,
+      shopcartList
     },
     props: {
       seller: {
@@ -88,6 +96,7 @@
           slidesPerView: 'auto',  // 能够同时显示的内容项数量
           mousewheelControl: true,
           freeMode: true,  // 自由模式
+          observer: true,
           onTap: function (leftSwiper) {
             // 清空样式
             for (let i = 0; i < jContentBox.length; i++) {
@@ -104,6 +113,7 @@
           slidesPerView: 'auto',  // 能够同时显示的内容项数量
           mousewheelControl: true,
           freeMode: true,  // 自由模式
+          observer: true,
           onSlideChangeEnd: function (rightSwiper) {
             // 清空样式
             for (let i = 0; i < jContentBox.length; i++) {
@@ -250,7 +260,7 @@
                   font-size: 20px;
                   line-height: 28px;
                   color: rgb(147, 153, 159);
-                  text-decoration: overline;
+                  text-decoration: line-through;
                 }
               }
             }
